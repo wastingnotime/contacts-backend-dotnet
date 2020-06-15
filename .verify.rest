@@ -1,0 +1,29 @@
+GET https://localhost:5001/Contacts
+
+
+###
+POST https://localhost:5001/Contacts
+Content-Type: application/json
+
+{
+    "firstName": "First",
+    "lastName": "Last",
+    "phoneNumber": "3333-1111"
+}
+
+###
+GET https://localhost:5001/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
+
+
+###
+PUT https://localhost:5001/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
+Content-Type: application/json
+
+{
+    "firstName": "FirstUpdated",
+    "lastName": "LastUpdated",
+    "phoneNumber": "3333-2222"
+}
+
+###
+DELETE https://localhost:5001/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
