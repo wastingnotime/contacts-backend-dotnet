@@ -5,6 +5,7 @@ COPY *.csproj ./
 RUN dotnet restore
 
 COPY . ./
+RUN dotnet test
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1

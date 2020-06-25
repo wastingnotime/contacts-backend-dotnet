@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ContactsBackendDotnet.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace ContactsBackendDotnet.Controllers
@@ -12,62 +13,70 @@ namespace ContactsBackendDotnet.Controllers
     [Route("[controller]")]
     public class ContactsController : ControllerBase
     {
-        private static readonly List<Contact> contacts = new List<Contact>(){
-            new Contact{FirstName= "Albert", LastName="Einstein", PhoneNumber="2222-1111"},
-            new Contact{FirstName= "Mary", LastName="Curie", PhoneNumber="1111-1111"}
-        };
-
         private readonly ILogger<ContactsController> _logger;
+        private readonly ContactContext _context;
 
-        public ContactsController(ILogger<ContactsController> logger)
+        public ContactsController(ILogger<ContactsController> logger, ContactContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Contact>> Get()
+        public async Task<ActionResult<IEnumerable<Contact>>> Get()
         {
-            return contacts;
+            return await _context.Contacts.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Contact> Get(string id)
+        public async Task<ActionResult<Contact>> Get(Guid id)
         {
-            var list = contacts.FirstOrDefault(l => l.Id == id);
-            if (list == null)
+            var item = await _context.Contacts.FindAsync(id);
+
+            if (item == null)
                 return NotFound();
 
-            return list;
+            return item;
         }
 
         [HttpPost]
-        public IActionResult Post(Contact value)
+        public async Task<IActionResult> Post(Contact value)
         {
-            contacts.Add(value);
+            _context.Contacts.Add(value);
+            await _context.SaveChangesAsync();
 
-            return Created(string.Format("{0}/{1}", Request.Path, value.Id), value);
+            return CreatedAtAction(nameof(Get), new { id = value.Id }, value);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(Contact value, string id)
+        public async Task<IActionResult> Update(Contact value, Guid id)
         {
-            var list = contacts.FirstOrDefault(l => l.Id == id);
-            if (list == null)
+            if (!id.Equals(value.Id))
+                return BadRequest();
+
+            var item = await _context.Contacts.FindAsync(id);
+            if (item == null)
                 return NotFound();
 
-            list = value;
+            item.FirstName = value.FirstName;
+            item.LastName = value.LastName;
+            item.PhoneNumber = value.PhoneNumber;
+
+            _context.Contacts.Update(item);
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var list = contacts.FirstOrDefault(l => l.Id == id);
-            if (list == null)
+            var item = await _context.Contacts.FindAsync(id);
+            if (item == null)
                 return NotFound();
 
-            contacts.Remove(list);
+            _context.Contacts.Remove(item);
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
