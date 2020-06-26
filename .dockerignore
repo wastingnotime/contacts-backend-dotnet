@@ -1,0 +1,11 @@
+bin\
+obj\
+
+# dev stuff
+contacts.db
+verify.rest
+.git
+.vscode
+.dockerignore
+Dockerfile
+README.md
