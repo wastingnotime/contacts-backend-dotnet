@@ -1,8 +1,9 @@
-﻿using System;
-using System.Data.Common;
-using System.Threading.Tasks;
+﻿using System.Data.Common;
+using ContactsBackendDotnet.Infrastructure;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+
+namespace ContactsBackendDotnet.Tests;
 
 public class TestDbContextFactory : IDisposable
 {
@@ -16,26 +17,20 @@ public class TestDbContextFactory : IDisposable
 
     public async Task<ContactContext> CreateContextAsync()
     {
-        if (_connection == null)
-        {
-            _connection = new SqliteConnection("DataSource=:memory:");
-            await _connection.OpenAsync();
+        if (_connection != null) return new ContactContext(CreateOptions());
+        _connection = new SqliteConnection("DataSource=:memory:");
+        await _connection.OpenAsync();
 
-            var options = CreateOptions();
-            using (var context = new ContactContext(options))
-            {
-                await context.Database.EnsureCreatedAsync();
-            }
-        }
-        return new ContactContext(CreateOptions());
+        var context = new ContactContext(CreateOptions());
+        await context.Database.EnsureCreatedAsync();
+        
+        return context;
     }
 
     public void Dispose()
     {
-        if (_connection != null)
-        {
-            _connection.Dispose();
-            _connection = null;
-        }
+        if (_connection == null) return;
+        _connection.Dispose();
+        _connection = null;
     }
 }
