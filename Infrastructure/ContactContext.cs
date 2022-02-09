@@ -1,11 +1,13 @@
 using ContactsBackendDotnet.Models;
 using Microsoft.EntityFrameworkCore;
 
+namespace ContactsBackendDotnet.Infrastructure;
+
 public class ContactContext : DbContext
 {
     public ContactContext(DbContextOptions<ContactContext> options) : base(options) { }
 
-    public DbSet<Contact> Contacts { get; set; }
+    public DbSet<Contact> Contacts { get; protected set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
