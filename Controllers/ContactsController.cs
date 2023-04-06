@@ -19,10 +19,8 @@ namespace ContactsBackendDotnet.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Contact>>> Get()
-        {
-            return await _context.Contacts.ToListAsync();
-        }
+        public async Task<ActionResult<IEnumerable<Contact>>> Get() => 
+            await _context.Contacts.ToListAsync();
 
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<Contact>> Get(Guid id)
@@ -46,7 +44,7 @@ namespace ContactsBackendDotnet.Controllers
                 return BadRequest();
 
             var item = await _context.Contacts.FindAsync(id);
-            if (item == null)
+            if (item is null)
                 return NotFound();
 
             item.FirstName = value.FirstName;
@@ -63,7 +61,7 @@ namespace ContactsBackendDotnet.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var item = await _context.Contacts.FindAsync(id);
-            if (item == null)
+            if (item is null)
                 return NotFound();
 
             _context.Contacts.Remove(item);
