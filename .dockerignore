@@ -1,11 +1,20 @@
-bin\
-obj\
+# git
+.git
+.gitignore
+
+# dotnet
+bin
+obj
 
 # dev stuff
 contacts.db
 verify.rest
-.git
+
+# ide's
 .vscode
+.idea
+
+# misc
 .dockerignore
 Dockerfile
 README.md
