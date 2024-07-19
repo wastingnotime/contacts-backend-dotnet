@@ -1,8 +1,8 @@
-GET http://localhost:5000/Contacts
+GET http://localhost:8010/Contacts
 
 
 ###
-POST http://localhost:5000/Contacts
+POST http://localhost:8010/Contacts
 Content-Type: application/json
 
 {
@@ -12,11 +12,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5000/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
+GET http://localhost:8010/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
 
 
 ###
-PUT http://localhost:5000/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
+PUT http://localhost:8010/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
 Content-Type: application/json
 
 {
@@ -26,4 +26,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:5000/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
+DELETE http://localhost:8010/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
