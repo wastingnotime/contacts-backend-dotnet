@@ -1,4 +1,4 @@
-using ContactsBackendDotnet.Infrastructure;
+using WastingNoTime.Contacts.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

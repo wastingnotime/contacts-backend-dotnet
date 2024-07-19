@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ContactsBackendDotnet.Migrations
+namespace WastingNoTime.Contacts.Migrations
 {
     public partial class InitialCreate : Migration
     {

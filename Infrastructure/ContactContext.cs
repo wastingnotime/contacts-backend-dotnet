@@ -1,7 +1,7 @@
-using ContactsBackendDotnet.Models;
 using Microsoft.EntityFrameworkCore;
+using WastingNoTime.Contacts.Models;
 
-namespace ContactsBackendDotnet.Infrastructure;
+namespace WastingNoTime.Contacts.Infrastructure;
 
 public class ContactContext : DbContext
 {
