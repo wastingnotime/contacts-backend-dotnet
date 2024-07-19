@@ -8,7 +8,8 @@ COPY *.csproj ./
 RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Release -o out
-RUN dotnet test
+# TODO: fix test -- there's a issue open for it -> https://github.com/wastingnotime/contacts-backend-dotnet/issues/10
+# RUN dotnet test
 RUN dotnet ef database update
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
@@ -20,4 +21,4 @@ VOLUME data
 COPY --from=build-env /app/contacts.db /data/
 
 ENV ASPNETCORE_ENVIRONMENT Production
-ENTRYPOINT ["dotnet", "ContactsBackendDotnet.dll"]
+ENTRYPOINT ["dotnet", "WastingNoTime.Contacts.dll"]

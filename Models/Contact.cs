@@ -1,4 +1,4 @@
-namespace ContactsBackendDotnet.Models;
+namespace WastingNoTime.Contacts.Models;
 
 public class Contact
 {

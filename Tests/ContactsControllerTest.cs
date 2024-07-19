@@ -1,10 +1,10 @@
-using ContactsBackendDotnet.Controllers;
-using ContactsBackendDotnet.Infrastructure;
-using ContactsBackendDotnet.Models;
 using Microsoft.AspNetCore.Mvc;
+using WastingNoTime.Contacts.Controllers;
+using WastingNoTime.Contacts.Infrastructure;
+using WastingNoTime.Contacts.Models;
 using Xunit;
 
-namespace ContactsBackendDotnet.Tests;
+namespace WastingNoTime.Contacts.Tests;
 
 public class ContactsControllerTest
 {

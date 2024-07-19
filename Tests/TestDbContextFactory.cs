@@ -1,9 +1,9 @@
 ﻿using System.Data.Common;
-using ContactsBackendDotnet.Infrastructure;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using WastingNoTime.Contacts.Infrastructure;
 
-namespace ContactsBackendDotnet.Tests;
+namespace WastingNoTime.Contacts.Tests;
 
 public class TestDbContextFactory : IDisposable
 {

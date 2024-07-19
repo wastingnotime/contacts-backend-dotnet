@@ -1,9 +1,9 @@
-using ContactsBackendDotnet.Infrastructure;
-using ContactsBackendDotnet.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WastingNoTime.Contacts.Infrastructure;
+using WastingNoTime.Contacts.Models;
 
-namespace ContactsBackendDotnet.Controllers;
+namespace WastingNoTime.Contacts.Controllers;
 
 [ApiController]
 [Route("[controller]")]
