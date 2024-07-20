@@ -8,8 +8,8 @@ COPY *.csproj ./
 RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Release -o out
-# TODO: fix test -- there's a issue open for it -> https://github.com/wastingnotime/contacts-backend-dotnet/issues/10
-# RUN dotnet test
+
+RUN dotnet test
 RUN dotnet ef database update
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
