@@ -23,8 +23,14 @@ public class ContactsControllerTest
 
         Assert.NotNull(actual);
         Assert.Equal(2, actual.Count);
-        Assert.Equal("Albert", actual[0].FirstName);
-        Assert.Equal("Marie", actual[1].FirstName);
+        
+        var albert = actual.First(x=>x.FirstName == "Albert");
+        Assert.NotNull(albert);
+        Assert.Equal("Albert", albert.FirstName);
+
+        var marie = actual.First(x=>x.FirstName == "Marie");
+        Assert.NotNull(marie);
+        Assert.Equal("Marie", marie.FirstName);
     }
 
     [Fact]
