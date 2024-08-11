@@ -15,7 +15,14 @@
 
 ## get started (linux instructions only)
 
-### option 1 - just build and use as docker image
+### option 1 - use latest docker image from dockerhub
+
+execute the remote docker image
+```
+docker run -p 8010:8010 wastingnotime/contacts-backend-dotnet
+```
+
+### option 2 - build and run a local docker image
 build a local docker image
 ```
 docker build --tag contacts.backend.dotnet .
@@ -26,7 +33,7 @@ execute the local docker image
 docker run -p 8010:8080 contacts.backend.dotnet
 ```
 
-### option 2 - execute from source code
+### option 3 - execute from source code
 
 - install dotnet 8 [how to](https://learn.microsoft.com/en-us/dotnet/core/install/linux)
 - go to root of solution and execute the commands below
