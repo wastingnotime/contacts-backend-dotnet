@@ -25,12 +25,12 @@ docker run -p 8010:8010 wastingnotime/contacts-backend-dotnet
 ### option 2 - build and run a local docker image
 build a local docker image
 ```
-docker build --tag contacts.backend.dotnet .
+docker build --tag contacts-backend-dotnet .
 ```
 
 execute the local docker image
 ```
-docker run -p 8010:8080 contacts.backend.dotnet
+docker run -p 8010:8080 contacts-backend-dotnet
 ```
 
 ### option 3 - execute from source code
