@@ -18,7 +18,7 @@ public class ContactsControllerTest
             new Contact { FirstName = "Marie", LastName = "Curie", PhoneNumber = "1111-1111" });
         await context.SaveChangesAsync();
 
-        var result = await new ContactsController(null, context).Get();
+        var result = await new ContactsController(new DummyLogger(), context).Get();
         var actual = result.Value as IList<Contact>;
 
         Assert.NotNull(actual);
@@ -43,7 +43,7 @@ public class ContactsControllerTest
         context.Add(contact);
         await context.SaveChangesAsync();
 
-        var result = await new ContactsController(null, context).Get(expected.Id);
+        var result = await new ContactsController(new DummyLogger(), context).Get(expected.Id);
         var actual = result.Value;
 
         Assert.NotNull(actual);
@@ -63,7 +63,7 @@ public class ContactsControllerTest
         await context.AddAsync(contact);
         await context.SaveChangesAsync();
 
-        var result = await new ContactsController(null, context).Delete(expected.Id);
+        var result = await new ContactsController(new DummyLogger(), context).Delete(expected.Id);
 
         Assert.IsType<NoContentResult>(result);
         Assert.Empty(context.Contacts);
@@ -78,7 +78,7 @@ public class ContactsControllerTest
         var contact = new Contact { FirstName = "Albert", LastName = "Einstein", PhoneNumber = "2222-1111" };
         var expected = contact.Clone();
 
-        var result = await new ContactsController(null, context).Post(contact);
+        var result = await new ContactsController(new DummyLogger(), context).Post(contact);
 
         Assert.IsType<CreatedAtActionResult>(result);
         var actual = ((CreatedAtActionResult)result).Value as Contact;
@@ -107,7 +107,7 @@ public class ContactsControllerTest
 
         var expected = changedContact.Clone();
 
-        var result = await new ContactsController(null, context).Update(changedContact, changedContact.Id);
+        var result = await new ContactsController(new DummyLogger(), context).Update(changedContact, changedContact.Id);
         Assert.IsType<NoContentResult>(result);
         Assert.Single(context.Contacts, c => c.Id == changedContact.Id);
 
