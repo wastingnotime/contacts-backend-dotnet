@@ -7,30 +7,17 @@ namespace WastingNoTime.Contacts.Tests;
 
 public class TestDbContextFactory : IDisposable
 {
-    private DbConnection _connection;
-
-    private DbContextOptions<ContactContext> CreateOptions()
-    {
-        return new DbContextOptionsBuilder<ContactContext>()
-            .UseSqlite(_connection).Options;
-    }
-
+    private readonly DbConnection _connection = new SqliteConnection("DataSource=:memory:");
     public async Task<ContactContext> CreateContextAsync()
     {
-        if (_connection != null) return new ContactContext(CreateOptions());
-        _connection = new SqliteConnection("DataSource=:memory:");
         await _connection.OpenAsync();
 
-        var context = new ContactContext(CreateOptions());
+        var context = new ContactContext(new DbContextOptionsBuilder<ContactContext>().UseSqlite(_connection).Options);
         await context.Database.EnsureCreatedAsync();
         
         return context;
     }
 
-    public void Dispose()
-    {
-        if (_connection == null) return;
+    public void Dispose() =>
         _connection.Dispose();
-        _connection = null;
-    }
 }
