@@ -82,6 +82,7 @@ public class ContactsControllerTest
 
         Assert.IsType<CreatedAtActionResult>(result);
         var actual = ((CreatedAtActionResult)result).Value as Contact;
+        Assert.NotNull(actual);
         Assert.Equal(expected.FirstName, actual.FirstName);
         Assert.Equal(expected.LastName, actual.LastName);
         Assert.Equal(expected.PhoneNumber, actual.PhoneNumber);
@@ -111,6 +112,7 @@ public class ContactsControllerTest
         Assert.Single(context.Contacts, c => c.Id == changedContact.Id);
 
         var actual = await context.Contacts.FindAsync(expected.Id);
+        Assert.NotNull(actual);
         Assert.Equal(expected.FirstName, actual.FirstName);
         Assert.Equal(expected.LastName, actual.LastName);
         Assert.Equal(expected.PhoneNumber, actual.PhoneNumber);
