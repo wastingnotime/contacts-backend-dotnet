@@ -1,9 +1,19 @@
-GET http://localhost:8010/Contacts
+@host = http://localhost:8010
+@resource = Contacts
+@contentType = application/json
 
+@baseUrl = {{host}}
 
 ###
-POST http://localhost:8010/Contacts
-Content-Type: application/json
+# @name getAllContacts
+GET {{baseUrl}}/Contacts
+Accept: application/json
+
+###
+# @name createContact
+POST {{baseUrl}}/Contacts
+Accept: {{contentType}}
+Content-Type: {{contentType}}
 
 {
     "firstName": "First",
@@ -11,19 +21,27 @@ Content-Type: application/json
     "phoneNumber": "3333-1111"
 }
 
+> {% client.global.set("contact", response.body); %}
+
 ###
-GET http://localhost:8010/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
+# @name getOneContact
+GET {{baseUrl}}/Contacts/{{contact.id}}
+Accept: {{contentType}}
 
 
 ###
-PUT http://localhost:8010/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
-Content-Type: application/json
+# @name updateContact
+PUT {{baseUrl}}/Contacts/{{contact.id}}
+Accept: {{contentType}}
+Content-Type: {{contentType}}
 
 {
+    "id": "{{contact.id}}",
     "firstName": "FirstUpdated",
     "lastName": "LastUpdated",
     "phoneNumber": "3333-2222"
 }
 
 ###
-DELETE http://localhost:8010/Contacts/4eae1bd7-1480-4ccc-b92b-662aea257b3c
+# @name deleteContact
+DELETE {{baseUrl}}/Contacts/{{contact.id}}
