@@ -9,7 +9,7 @@ namespace WastingNoTime.Contacts.Tests;
 public class ContactsControllerTest
 {
     [Fact]
-    public async Task Can_get_all_contactsAsync()
+    public async Task Can_get_all_contacts()
     {
         var context = await GetContactContext();
 
