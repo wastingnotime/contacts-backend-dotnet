@@ -81,4 +81,4 @@ retrieve existing contacts
 curl --request GET \
   --url http://localhost:8010/contacts
 ```
-more examples and details about requests on (link) *to be defined
+more examples and details about requests on [verify.rest](https://raw.githubusercontent.com/wastingnotime/contacts-backend-dotnet/refs/heads/main/verify.rest)
